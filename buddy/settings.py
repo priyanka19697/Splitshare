@@ -11,8 +11,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+env = environ.Env()
+environ.Env.read_env()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -25,7 +30,7 @@ SECRET_KEY = 'django-insecure-pyc8w9%+*=8*^_ne-93gn(w(5fd!f(x1eg@v4yx0ssbc(2qs-%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0']
+ALLOWED_HOSTS = ['0.0.0.0', '65.2.191.218']
 
 
 # Application definition
@@ -82,13 +87,13 @@ WSGI_APPLICATION = 'buddy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'buddy',
-        'USER': 'priyanka',
-        'PASSWORD': 'admin',
-        'ROOT_PASSWORD':'admin',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'ENGINE': env('ENGINE'),
+        'NAME':  env('DATABASE_NAME'),
+        'USER':  env('DATABASE_USER'),
+        'PASSWORD':  env('DATABASE_PASS'),
+        'ROOT_PASSWORD': env('DATABASE_PASS'),
+        'HOST':  env('HOST'),
+        'PORT':  env('PORT')
     }
 }
 
